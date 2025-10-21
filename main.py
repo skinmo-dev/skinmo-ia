@@ -95,7 +95,7 @@ def analyze(inp: AnalyzeIn):
     b_al = _align(a, b)
 
     a_f, b_f = img_as_float(a), img_as_float(b_al)
-    s, diff = ssim(a_f, b_f, full=True)
+    s, diff = ssim(a_f, b_f, full=True, data_range=1.0)  # images en [0,1]
     diff = 1 - diff
     mae = float(np.mean(np.abs(a_f - b_f)))
     delta = max(0.0, min(100.0, (1.0 - mae) * 100.0))
